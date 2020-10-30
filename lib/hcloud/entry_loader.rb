@@ -94,7 +94,7 @@ module Hcloud
 
     attr_accessor :response
 
-    def initialize(client = nil, **kwargs)
+    def initialize(client = nil, kwargs)
       @client = client
       _load(kwargs)
     end

@@ -107,15 +107,19 @@ module Hcloud
       end
     end
 
-    def prepare_request(url, **args, &block)
-      req = request(url, **args.merge(block: block))
+#    def prepare_request(url, **args, &block)
+#      req = request(url, **args.merge(block: block))
+    def prepare_request(url, options={}, &block)
+      options = options.merge(block: block)
+      req = request(url, options)
       return req.run.resource unless concurrent?
 
       hydra.queue req
       ResourceFuture.new(req)
     end
 
-    def request(path, **options) # rubocop:disable Metrics/MethodLength
+#    def request(path, **options) # rubocop:disable Metrics/MethodLength
+    def request(path, options={}) # rubocop:disable Metrics/MethodLength
       hcloud_attributes = TyphoeusExt.collect_attributes(options)
       if x = options.delete(:j)
         options[:body] = Oj.dump(x, mode: :compat)
