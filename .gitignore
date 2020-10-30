@@ -9,3 +9,6 @@ config.ru
 /spec/reports/
 /tmp/
 *.swp
+
+*.un~
+.rake_tasks~
