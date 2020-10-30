@@ -72,5 +72,9 @@ module Hcloud
     def request_console
       prepare_request('actions/request_console', method: :post) { |j| [j[:wss_url], j[:password]] }
     end
+
+    def change_dns_ptr(ip:, dns_ptr:)
+      prepare_request('actions/change_dns_ptr', j: COLLECT_ARGS.call(__method__, binding))
+    end
   end
 end
